@@ -18,11 +18,7 @@
     </form>
   </div>
 
-  {% for f in user.feedback %}
-  {% if f.username %}
   <h3 class="card-header mb-3">Feedback<i class="far fa-comments ml-2"></i></h3>
-  {% endif %}
-  {% endfor %}
 
   <div class="row">
     {% for f in user.feedback %}
