@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="https://kit.fontawesome.com/d240c4c1b9.js" crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark justify-content-between">
+    <div class="container">
+      <span class="h4"><a class="text-decoration-none text-light" href="/"><i class="far fa-comments mr-2"></i> Flask
+          Feedback</a></span>
+      <ul class="nav navbar-nav flex-row">
+        {% if session["username"] %}
+        <li class="nav-item">
+          <a class="nav-link pr-3" href="/logout">Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link pr-3" href="/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/register">Sign Up</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    {% for cat, msg in get_flashed_messages(with_categories=true) %}
+    <h5 class="alert text-center alert-dismissible alert-{{cat}}">{{msg}}</h5>
+    {% endfor %}
+
+    {% block content %}
+    {% endblock %}
+  </div>
+
+
+</body>
+
+</html>

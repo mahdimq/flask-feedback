@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}User Details{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="display-4">{{user.first_name}} {{user.last_name}}</h1>
+    <hr class="my-4">
+
+    <p class="lead">Username: {{user.username}}</p>
+    <p class="lead">Email: {{user.email}}</p>
+
+    <form class="form-group  mb-1 mt-4" action="/users/{{user.username}}/delete" method="POST">
+      <a class="btn btn-lg btn-primary" href="/users/{{user.username}}/feedback/add" role="button">Add
+        Feedback</a>
+      <button class="btn btn-lg btn-warning" type="submit">delete user</button>
+    </form>
+  </div>
+
+  {% for f in user.feedback %}
+  {% if f.username %}
+  <h3 class="card-header mb-3">Feedback<i class="far fa-comments ml-2"></i></h3>
+  {% endif %}
+  {% endfor %}
+
+  <div class="row">
+    {% for f in user.feedback %}
+    <div class="col-lg-6">
+      <div class="card border-primary mb-3 ">
+        <div class="card-header text-primary">{{f.username}}</div>
+        <div class="card-body">
+          <h4 class="card-title">{{f.title}}</h4>
+          <p class="card-text">{{f.content}}</p>
+          <form action="/feedback/{{f.id}}/delete" method="POST">
+            <a class="btn btn-small btn-outline-danger" href="/feedback/{{f.id}}/update">Edit feedback</a>
+            <button class="btn btn-small btn-outline-warning">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+{% endblock %}
